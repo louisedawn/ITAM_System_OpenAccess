@@ -1,0 +1,103 @@
+body {
+  background-image: url('bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative; 
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(97, 114, 176, 0.3); /* #6172B0 with 50% opacity */
+  z-index: 0; 
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  z-index: 1; 
+}
+
+p {
+  font-size: 15px;
+  color: #252525;
+  text-align: center;
+  margin-top: 15px;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  margin-left: 3px; 
+}
+
+.form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px #000;
+  position: relative; /* Ensure it respects z-index */
+}
+
+img {
+  position: relative;
+  width: 90px;
+  top: 50%;
+  left: 36.5%;
+}
+
+h1 {
+  text-align: center;
+  font-size: 22px;
+  color: #6172B0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+button {
+  padding: 15px;
+  background: linear-gradient(45deg, #6172B0, #6172B0);
+  background-color: #6172B0;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0); 
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #6172B0;
+  transform: scale(1.05); /* Scale the button up on hover */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+

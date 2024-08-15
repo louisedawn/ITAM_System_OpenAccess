@@ -131,17 +131,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const checkboxes = document.querySelectorAll(".form-check-input");
-        const table = document.getElementById("dashboardTable");
-        const rows = table.querySelectorAll("tbody tr");
-        window.redirectToInventory = function(serialNo) {
-            window.location.href = `/inventory?serial_no=${serialNo}`;
-        };
-        window.redirectToRequestInventory = function(serialNo) {
-            window.location.href = `/request-inventory?serial_no=${serialNo}`;
-        };
-
-        // Pie chart data
         const ctx = document.getElementById('assetsPieChart').getContext('2d');
         const assetCounts = [
             {{ storage_room_count }},
@@ -195,7 +184,14 @@
                     legend: {
                         display: true,
                         position: 'bottom',  // Position the legend at the bottom
-                        align: 'center'     // Center align the legend
+                        align: 'center',     // Center align the legend
+                        labels: {
+                            usePointStyle: true, // Use point style for labels
+                            padding: 20,         // Add padding between legend items
+                            font: {
+                                size: 14,         // Adjust font size
+                            },
+                        },
                     },
                     tooltip: {
                         enabled: true,

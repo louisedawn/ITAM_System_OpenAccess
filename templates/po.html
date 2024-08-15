@@ -107,7 +107,6 @@
                 // Add section III
                 const itAllocationContent = [
                     "Location: " + (data.location || ''),
-                    "Place: " + (data.place || ''),
                     "Business Unit Allocation: " + (data.business_unit || '')
                 ];
                 addSection("III. IT ASSET ALLOCATION", itAllocationContent);
@@ -250,20 +249,8 @@
                         <label><input type="radio" name="location" value="RSC (19th)"> RSC (19th)</label>
                         <label><input type="radio" name="location" value=" RSC (21st)"> RSC (21st)</label>
                         <label><input type="radio" name="location" value="RSC (32nd)"> RSC (32nd)</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Place:</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="place" value="Davao (Filandia)"> Davao (Filandia)</label>
-                        <label><input type="radio" name="place" value="Davao (Matina)"> Davao (Matina)</label>
-                        <label><input type="radio" name="place" value="Summit"> Summit</label>
-                        <label><input type="radio" name="place" value="Summit"> Makati (Test) </label>
-        
-
+                        <label><input type="radio" name="location" value="Davao (Filandia)"> Davao (Filandia)</label>
+                        <label><input type="radio" name="location" value="Davao (Matina)"> Davao (Matina)</label>
                     </div>
                 </div>
             </div>

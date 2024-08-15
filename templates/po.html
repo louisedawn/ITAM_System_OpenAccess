@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block title %}
     <title>IT Asset Management System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='postyles.css') }}">
@@ -7,18 +8,25 @@
     <script>
         window.onload = function() {
             document.getElementById('automatedForm').onsubmit = function(event) {
-                event.preventDefault(); 
+                event.preventDefault(); // Prevent the default form submission
+    
+                // Collect form data
                 const formData = new FormData(this);
                 const data = {};
                 formData.forEach((value, key) => {
                     data[key] = value;
                 });
+    
+                // Create a PDF
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 const margin = 20; // Define margin
                 const boxWidth = doc.internal.pageSize.getWidth() - margin * 2; // Box width considering margins
                 const pageHeight = doc.internal.pageSize.getHeight(); // Page height
+    
                 let yPos = margin; // Initial y position
+    
+                // Function to create a section with a title and table content
                 function addSection(title, content) {
                     if (title) {
                         // Draw the filled rectangle for the section title
@@ -129,8 +137,170 @@
             };
         };
     </script>
+    
 {% endblock %}
+
 {% block content %}
-<main><div class="container-fluid"><h1 class="mt-4"><i class="sb-nav-link-icon"></i> Purchase Order Request Form</h1><ol class="breadcrumb mb-4">
-<li class="breadcrumb-item"><a href="/index">Dashboard</a></li><li class="breadcrumb-item active" aria-current="page">Request Form</li></ol></div><div class="form-container"><form id="automatedForm"><h4 class="mb-4"><b>IT ASSET PO REQUEST FORM</b></h4><div class="form-group"><label for="name">Ticket #:</label><input type="text" id="name" name="name" class="form-control" required></div><h6 class="mt-4"><b>I. REQUESTING PARTY INFORMATION</b></h6><div class="form-row"><div class="form-group col-md-6"><label for="requestor">Requestor:</label><input type="text" id="requestor" name="requestor" class="form-control" required></div><div class="form-group col-md-6"><label for="program_dept">Program/Department:</label><input type="text" id="program_dept" name="program_dept" class="form-control" required></div></div><div class="form-group"><label>Client Passthrough cost?</label><div class="radio-group"><label><input type="radio" name="client_passthrough" value="Yes"> Yes</label><label><input type="radio" name="client_passthrough" value="No"> No</label><label><input type="radio" name="client_passthrough" value="N/A"> N/A</label></div></div><div class="form-row"><div class="form-group col-md-6"><label for="date_requested">Date Requested:</label><input type="date" id="date_requested" name="date_requested" class="form-control" required></div><div class="form-group col-md-6"><label for="date_required">Date Required:</label><input type="date" id="date_required" name="date_required" class="form-control" required></div></div><h6 class="mt-4"><b>II. IT ASSET INFORMATION</b></h6><div class="form-group"><label>Expenditure Category:</label><div class="radio-group"><label><input type="radio" name="expenditure" value="Capital Asset"> Capital Asset</label><label><input type="radio" name="expenditure" value="Consumable"> Consumable</label><label><input type="radio" name="expenditure" value="Subscription"> Subscription</label><label><input type="radio" name="expenditure" value="Other"> Others</label></div></div><div class="form-group"><label>IT Asset Type</label><div class="radio-group"><label><input type="radio" name="asset_type" value="Software"> Software</label><label><input type="radio" name="asset_type" value="Hardware"> Hardware</label><label><input type="radio" name="asset_type" value="Others"> Others</label></div></div><div class="form-row"><div class="form-group col-md-6"><label for="vendor">Vendor:</label><input type="text" id="vendor" name="vendor" class="form-control" required></div><div class="form-group col-md-6"><label for="email_mobile">Email/Mobile:</label><input type="text" id="email_mobile" name="email_mobile" class="form-control" required></div></div><div class="form-row"><div class="form-group col-md-6"><label for="manager">Account Manager:</label><input type="text" id="manager" name="manager" class="form-control" required></div><div class="form-group col-md-6"><label for="asset_desc">IT Asset Description:</label><input type="text" id="asset_desc" name="asset_desc" class="form-control" required></div></div><h6 class="mt-4"><b>III. IT ASSET ALLOCATION</b></h6><div class="form-row"><div class="form-group"><label>Location:</label><div class="radio-group"><label><input type="radio" name="location" value="Jaka (5th)"> Jaka (5th)</label><label><input type="radio" name="location" value=" RSC (7th)"> RSC (7th)</label><label><input type="radio" name="location" value="RSC (19th)"> RSC (19th)</label><label><input type="radio" name="location" value=" RSC (21st)"> RSC (21st)</label><label><input type="radio" name="location" value="RSC (32nd)"> RSC (32nd)</label></div></div></div><div class="form-row"><div class="form-group"><label>Place:</label><div class="radio-group"><label><input type="radio" name="place" value="Davao (Filandia)"> Davao (Filandia)</label><label><input type="radio" name="place" value="Davao (Matina)"> Davao (Matina)</label><label><input type="radio" name="place" value="Summit"> Summit</label><label><input type="radio" name="place" value="Summit"> Makati (Test) </label></div></div></div><div class="form-row"><div class="form-group col-md-6"><label for="business_unit">Business Unit Allocation:</label><input type="text" id="business_unit" name="business_unit" class="form-control" required></div></div><h6 class="mt-4"><b>IV. NOTES & ATTACHMENTS</b></h6><div class="form-group"><label for="notes">Notes:</label><textarea id="notes" name="notes" class="form-control" rows="3"></textarea></div><div class="form-row"><div class="form-group col-md-6"><label for="prepared_by">Prepared by:</label><input type="text" id="prepared_by" name="prepared_by" class="form-control" required></div><div class="form-group col-md-6"><label for="department">Department:</label><input type="text" id="department" name="department" class="form-control" required></div><div class="form-group col-md-6"><label for="prepared_date">Date:</label><input type="date" id="prepared_date" name="prepared_date" class="form-control" required></div></div><button type="submit" class="btn btn-primary"><b>Generate PDF</b></button></form></div></main>
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4"><i class="sb-nav-link-icon"></i> Purchase Order Request Form</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Request Form</li>
+        </ol>
+    </div>
+
+    <div class="form-container">
+        <form id="automatedForm">
+            <h4 class="mb-4"><b>IT ASSET PO REQUEST FORM</b></h4>
+
+            <div class="form-group">
+                <label for="name">Ticket #:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+
+            <h6 class="mt-4"><b>I. REQUESTING PARTY INFORMATION</b></h6>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="requestor">Requestor:</label>
+                    <input type="text" id="requestor" name="requestor" class="form-control" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="program_dept">Program/Department:</label>
+                    <input type="text" id="program_dept" name="program_dept" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Client Passthrough cost?</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="client_passthrough" value="Yes"> Yes</label>
+                    <label><input type="radio" name="client_passthrough" value="No"> No</label>
+                    <label><input type="radio" name="client_passthrough" value="N/A"> N/A</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="date_requested">Date Requested:</label>
+                    <input type="date" id="date_requested" name="date_requested" class="form-control" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="date_required">Date Required:</label>
+                    <input type="date" id="date_required" name="date_required" class="form-control" required>
+                </div>
+            </div>
+
+            <h6 class="mt-4"><b>II. IT ASSET INFORMATION</b></h6>
+
+            <div class="form-group">
+                <label>Expenditure Category:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="expenditure" value="Capital Asset"> Capital Asset</label>
+                    <label><input type="radio" name="expenditure" value="Consumable"> Consumable</label>
+                    <label><input type="radio" name="expenditure" value="Subscription"> Subscription</label>
+                    <label><input type="radio" name="expenditure" value="Other"> Others</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>IT Asset Type</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="asset_type" value="Software"> Software</label>
+                    <label><input type="radio" name="asset_type" value="Hardware"> Hardware</label>
+                    <label><input type="radio" name="asset_type" value="Others"> Others</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="vendor">Vendor:</label>
+                    <input type="text" id="vendor" name="vendor" class="form-control" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="email_mobile">Email/Mobile:</label>
+                    <input type="text" id="email_mobile" name="email_mobile" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="manager">Account Manager:</label>
+                    <input type="text" id="manager" name="manager" class="form-control" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="asset_desc">IT Asset Description:</label>
+                    <input type="text" id="asset_desc" name="asset_desc" class="form-control" required>
+                </div>
+            </div>
+
+
+            <h6 class="mt-4"><b>III. IT ASSET ALLOCATION</b></h6>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Location:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="location" value="Jaka (5th)"> Jaka (5th)</label>
+                        <label><input type="radio" name="location" value=" RSC (7th)"> RSC (7th)</label>
+                        <label><input type="radio" name="location" value="RSC (19th)"> RSC (19th)</label>
+                        <label><input type="radio" name="location" value=" RSC (21st)"> RSC (21st)</label>
+                        <label><input type="radio" name="location" value="RSC (32nd)"> RSC (32nd)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Place:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="place" value="Davao (Filandia)"> Davao (Filandia)</label>
+                        <label><input type="radio" name="place" value="Davao (Matina)"> Davao (Matina)</label>
+                        <label><input type="radio" name="place" value="Summit"> Summit</label>
+                        <label><input type="radio" name="place" value="Summit"> Makati (Test) </label>
+        
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="business_unit">Business Unit Allocation:</label>
+                    <input type="text" id="business_unit" name="business_unit" class="form-control" required>
+                </div>
+            </div>
+
+            <h6 class="mt-4"><b>IV. NOTES & ATTACHMENTS</b></h6>
+
+            <div class="form-group">
+                <label for="notes">Notes:</label>
+                <textarea id="notes" name="notes" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="prepared_by">Prepared by:</label>
+                    <input type="text" id="prepared_by" name="prepared_by" class="form-control" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="department">Department:</label>
+                    <input type="text" id="department" name="department" class="form-control" required>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="prepared_date">Date:</label>
+                    <input type="date" id="prepared_date" name="prepared_date" class="form-control" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary"><b>Generate PDF</b></button>
+        </form>
+    </div>
+</main>
 {% endblock %}

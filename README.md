@@ -44,7 +44,7 @@ $ venv\Scripts\activate (for windows), . venv/bin/activate  (for mac)
 **Make sure to have VSCode installed**
 
 **Make sure to have python installed**
-**in the terminal or cmd install these libraries...
+**in the terminal or cmd install these libraries but some of these are already incuded in the requirements.txt...
 > pip install flask 
 > pip install pandas 
 > pip install flask_login

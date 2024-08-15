@@ -86,12 +86,12 @@
                                         <label class="form-check-label" for="toggleRamSlot">RAM Slot</label>
                                     </div>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input column-toggle" type="checkbox" value="ram_capacity" id="toggleRamCapacity" checked>
-                                    <label class="form-check-label" for="toggleRamCapacity">RAM Capacity</label>
-                                </div>
                                 <!-- Third Column -->
                                 <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="ram_capacity" id="toggleRamCapacity" checked>
+                                        <label class="form-check-label" for="toggleRamCapacity">RAM Capacity</label>
+                                    </div>
                                     <div class="form-check">
                                         <input class="form-check-input column-toggle" type="checkbox" value="ram_type" id="toggleRamType" checked>
                                         <label class="form-check-label" for="toggleRamType">RAM Type</label>
@@ -125,7 +125,7 @@
                             {% else %}
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
-                                    <tr><th>Actions</th><th class="site">Site</th><th class="asset_type">Asset Type</th><th class="brand">Brand</th><th class="asset_tag">Asset Tag</th><th class="serial_no">Serial Number</th><th class="location">Location</th><th class="campaign">Campaign</th><th class="station_no">Station Number</th><th class="pur_date">Purchase Date</th><th class="si_num">Sales Invoice Number</th><th class="model">Model</th><th class="specs">Specifications</th><th class="ram_slot">RAM Slot</th><th class="ram_type">RAM Type</th><th class="ram_capacity">RAM Capacity</th><th class="pc_name">PC Name</th><th class="win_ver">Windows Version</th><th class="last_upd">Last Update/Date Installed</th><th class="completed_by">Completed By</th>
+                                    <tr><th>Actions</th><th class="site">Site</th><th class="asset_type">Asset Type</th><th class="brand">Brand</th><th class="asset_tag">Asset Tag</th><th class="serial_no">Serial Number</th><th class="location">Location</th><th class="campaign">Campaign</th><th class="station_no">Station Number</th><th class="pur_date">Purchase Date</th><th class="si_num">Sales Invoice Number</th><th class="model">Model</th><th class="specs">Specifications</th><th class="ram_slot">RAM Slot</th><th class="ram_capacity">RAM Capacity</th><th class="ram_type">RAM Type</th><th class="pc_name">PC Name</th><th class="win_ver">Windows Version</th><th class="last_upd">Last Update/Date Installed</th><th class="completed_by">Completed By</th>
                                     </tr></thead><tbody>
                                     {% for asset in assets %}
                                     <tr><td><div class="d-inline-flex">
@@ -133,7 +133,7 @@
                                                     <i class="fas fa-edit"></i></a>
                                                 <a href="{{ url_for('delete_asset', asset_id=asset.id) }}" class="btn btn-danger" style="margin-left: 5px;">
                                                     <i class="fas fa-trash-alt"></i></a></div></td>                                        
-                                        <td class="site">{{ asset.site }}</td><td class="asset_type">{{ asset.asset_type }}</td><td class="brand">{{ asset.brand }}</td><td class="asset_tag">{{ asset.asset_tag }}</td><td class="serial_no">{{ asset.serial_no }}</td><td class="location">{{ asset.location }}</td><td class="campaign">{{ asset.campaign }}</td><td class="station_no">{{ asset.station_no }}</td><td class="pur_date">{{ asset.pur_date }}</td><td class="si_num">{{ asset.si_num }}</td><td class="model">{{ asset.model }}</td><td class="specs">{{ asset.specs }}</td><td class="ram_slot">{{ asset.ram_slot }}</td><td class="ram_type">{{ asset.ram_type }}</td><td class="ram_capacity">{{ asset.ram_capacity }}</td><td class="pc_name">{{ asset.pc_name }}</td><td class="win_ver">{{ asset.win_ver }}</td><td class="last_upd">{{ asset.last_upd }}</td><td class="completed_by">{{ asset.completed_by }}</td></tr>
+                                        <td class="site">{{ asset.site }}</td><td class="asset_type">{{ asset.asset_type }}</td><td class="brand">{{ asset.brand }}</td><td class="asset_tag">{{ asset.asset_tag }}</td><td class="serial_no">{{ asset.serial_no }}</td><td class="location">{{ asset.location }}</td><td class="campaign">{{ asset.campaign }}</td><td class="station_no">{{ asset.station_no }}</td><td class="pur_date">{{ asset.pur_date }}</td><td class="si_num">{{ asset.si_num }}</td><td class="model">{{ asset.model }}</td><td class="specs">{{ asset.specs }}</td><td class="ram_slot">{{ asset.ram_slot }}</td><td class="ram_capacity">{{ asset.ram_capacity }}</td><td class="ram_type">{{ asset.ram_type }}</td><td class="pc_name">{{ asset.pc_name }}</td><td class="win_ver">{{ asset.win_ver }}</td><td class="last_upd">{{ asset.last_upd }}</td><td class="completed_by">{{ asset.completed_by }}</td></tr>
                                     {% endfor %}</tbody></table>{% endif %}</div></div></div></div></div></div></main>
 <script>
     document.addEventListener('DOMContentLoaded', function() {

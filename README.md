@@ -1,4 +1,4 @@
-# Flask Inventory Managment for Open Access IT Assets Management
+# Flask Inventory Application for Open Access IT Assets Management
 
 ## IT Asset Management System
 

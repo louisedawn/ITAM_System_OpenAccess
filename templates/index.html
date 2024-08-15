@@ -23,40 +23,24 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Storage Room</td>
+                                        <td><b>Storage Room</b></td>
                                         <td id="storageRoomCount" class="font-weight-normal text-dark">{{ storage_room_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>7th Floor</td>
-                                        <td id="seventhFloorCount" class="font-weight-normal text-dark">{{ seventh_floor_count }}</td>
+                                        <td>Desktop</td>
+                                        <td id="DesktopCount" class="font-weight-normal text-dark">{{ desktop_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>19th Floor</td>
-                                        <td id="nineteenthFloorCount" class="font-weight-normal text-dark">{{ nineteenth_floor_count }}</td>
+                                        <td>Monitor</td>
+                                        <td id="MonitorCount" class="font-weight-normal text-dark">{{ monitor_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>21st Floor</td>
-                                        <td id="twentyFirstFloorCount" class="font-weight-normal text-dark">{{ twenty_first_floor_count }}</td>
+                                        <td>Laptop</td>
+                                        <td id="LaptopCount" class="font-weight-normal text-dark">{{ laptop_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>32nd Floor</td>
-                                        <td id="thirtySecondFloorCount" class="font-weight-normal text-dark">{{ thirty_second_floor_count }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>WFH</td>
-                                        <td id="wfhCount" class="font-weight-normal text-dark">{{ wfh_count }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Wise Production Area</td>
-                                        <td id="wiseProductionAreaCount" class="font-weight-normal text-dark">{{ wise_production_area_count }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vendor</td>
-                                        <td id="vendorCount" class="font-weight-normal text-dark">{{ vendor_count }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>JAKA - 5th Floor</td>
-                                        <td id="jakaFifthFloorCount" class="font-weight-normal text-dark">{{ jaka_fifth_floor_count }}</td>
+                                        <td>Headset</td>
+                                        <td id="HeadsetCount" class="font-weight-normal text-dark">{{ headset_count }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -145,26 +129,18 @@
         const ctx = document.getElementById('assetsPieChart').getContext('2d');
         const assetCounts = [
             {{ storage_room_count }},
-            {{ seventh_floor_count }},
-            {{ nineteenth_floor_count }},
-            {{ twenty_first_floor_count }},
-            {{ thirty_second_floor_count }},
-            {{ wfh_count }},
-            {{ wise_production_area_count }},
-            {{ vendor_count }},
-            {{ jaka_fifth_floor_count }}
+            {{ desktop_count }},
+            {{ monitor_count }},
+            {{ laptop_count }},
+            {{ headset_count }},
         ];
 
         const locations = [
             'Storage Room', 
-            '7th Floor', 
-            '19th Floor', 
-            '21st Floor', 
-            '32nd Floor', 
-            'WFH', 
-            'Wise Production Area', 
-            'Vendor', 
-            'JAKA - 5th Floor'
+            'Desktop', 
+            'Monitor', 
+            'Laptop', 
+            'Headset', 
         ];
 
         const assetsPieChart = new Chart(ctx, {

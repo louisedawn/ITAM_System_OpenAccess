@@ -79,28 +79,38 @@ def index():
     print("Assets:", assets)
     # Count the number of assets in the Storage Room
     storage_room_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room"').fetchone()[0]
-    seventh_floor_count = conn.execute('SELECT COUNT(*) FROM assets WHERE location = "7th Floor"').fetchone()[0]
-    nineteenth_floor_count = conn.execute('SELECT COUNT(*) FROM assets WHERE location = "19th Floor"').fetchone()[0]
-    twenty_first_floor_count = conn.execute('SELECT COUNT(*) FROM assets WHERE location = "21st Floor"').fetchone()[0]
-    thirty_second_floor_count = conn.execute('SELECT COUNT(*) FROM assets WHERE location = "32nd Floor"').fetchone()[0]
-    wfh_count = conn.execute('SELECT COUNT(*) FROM assets WHERE location = "WFH"').fetchone()[0]
-    wise_production_area_count = conn.execute('SELECT COUNT(*) FROM assets WHERE location = "Wise Production Area"').fetchone()[0]
-    vendor_count = conn.execute('SELECT COUNT(*) FROM assets WHERE location = "Vendor"').fetchone()[0]
-    jaka_fifth_floor_count = conn.execute('SELECT COUNT(*) FROM assets WHERE location = "JAKA - 5th Floor"').fetchone()[0]
-
+    desktop_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type = "Desktop"').fetchone()[0]
+    monitor_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Monitor"').fetchone()[0]
+    headset_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Headset"').fetchone()[0]
+    laptop_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Laptop"').fetchone()[0]
+    dongle_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Dongle"').fetchone()[0]
+    firewall_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Firewall"').fetchone()[0]
+    ipphone_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "IP Phone"').fetchone()[0]
+    router_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Router"').fetchone()[0]
+    yubikey_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Yubikey"').fetchone()[0]
+    switch_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Switch"').fetchone()[0]
+    tablet_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Tablet"').fetchone()[0]
+    cctv_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "CCTV"').fetchone()[0]
+    nvr_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "NVR"').fetchone()[0]
+    ups_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "UPS"').fetchone()[0]
+    server_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Server"').fetchone()[0]
+    cellphone_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Cellphone"').fetchone()[0]
+    biometric_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Biometric"').fetchone()[0]
+    dooraccess_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Door Access"').fetchone()[0]
+    printer_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Printer"').fetchone()[0]
+    webcam_count = conn.execute('SELECT COUNT(*) FROM assets WHERE station_no = "Storage Room" AND asset_type  = "Webcam"').fetchone()[0]
     conn.close()
 
     return render_template('index.html', 
                            assets=assets, 
                            storage_room_count=storage_room_count,
-                           seventh_floor_count=seventh_floor_count,
-                           nineteenth_floor_count=nineteenth_floor_count,
-                           twenty_first_floor_count=twenty_first_floor_count,
-                           thirty_second_floor_count=thirty_second_floor_count,
-                           wfh_count=wfh_count,
-                           wise_production_area_count=wise_production_area_count,
-                           vendor_count=vendor_count,
-                           jaka_fifth_floor_count=jaka_fifth_floor_count)
+                           desktop_count= desktop_count,
+                           monitor_count=monitor_count,
+                           headset_count=headset_count,
+                           laptop_count=laptop_count
+                            dongle_count=dongle_count,
+                            
+    )
 
 @app.route("/export-excel", methods=["POST"])
 @login_required

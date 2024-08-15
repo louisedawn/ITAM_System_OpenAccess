@@ -11,13 +11,13 @@
 First, you need to clone this repo:
 
 ```bash
-$ git clone https://github.com/shraite7/flask-inventory-app.git
+$ git clone https://github.com/louisedawn/ITAM_System_OpenAccess
 ```
 
-Then change into the `flask-inventory-app` folder:
+Then change into the `ITAM_System_OpenAccess` folder:
 
 ```bash
-$ cd flask-inventory-app
+$ cd ITAM_System_OpenAccess
 ```
 
 Now, we will need to create a virtual environment and install all the dependencies. We have two options available for now.
@@ -39,7 +39,7 @@ $ venv\Scripts\activate (for windows), . venv/bin/activate  (for mac)
 ## How to Run the Application?
 **Before running the application, make sure you have activated the virtual enviroment:**
 
-**Make sure to have DB Browser for SQLite3 installed** 
+**Make sure to have DB Browser for SQLite3 installed for viewing of the DB** 
 
 **Make sure to have VSCode installed**
 
@@ -49,7 +49,6 @@ $ venv\Scripts\activate (for windows), . venv/bin/activate  (for mac)
 > pip install pandas 
 > pip install flask_login
 > pip install datetime
-> pip install mariadb
 > pip install openpyxl
 
 

@@ -159,7 +159,7 @@ def import_csv():
                                          (asset_type, asset_tag, serial_no)).fetchone()
             if existing_row:
                 # Update the existing row with new data
-                conn.execute('UPDATE assets SET site = ?, asset_type = ?, brand = ?, asset_tag = ?, serial_no = ?, location = ?, campaign = ?, station_no = ?, pur_date = ?, si_num = ?, model = ?, specs = ?, ram_slot = ?, ram_type = ?, ram_capacity = ?, pc_name = ?, win_ver = ?, last_upd = ?, completed_by = ? WHERE id = ?',
+                conn.execute('UPDATE assets SET site = ?, asset_type = ?, brand = ?, asset_tag = ?, serial_no = ?, location = ?, campaign = ?, station_no = ?, pur_date = ?, si_num = ?, model = ?, specs = ?, ram_slot = ?, ram_capacity = ?, ram_type = ?, pc_name = ?, win_ver = ?, last_upd = ?, completed_by = ? WHERE id = ?',
                              (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], existing_row[0]))  # Use existing row's id for the update
                 updated_rows.append(row)
             else:
@@ -167,7 +167,7 @@ def import_csv():
                 unique_rows.append(row)
         # Insert unique rows into the database
         for row in unique_rows:
-            conn.execute('INSERT INTO assets (site, asset_type, brand, asset_tag, serial_no, location, campaign, station_no, pur_date, si_num, model, specs, ram_slot, ram_type, ram_capacity, pc_name, win_ver, last_upd, completed_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            conn.execute('INSERT INTO assets (site, asset_type, brand, asset_tag, serial_no, location, campaign, station_no, pur_date, si_num, model, specs, ram_slot, ram_capacity, ram_type, pc_name, win_ver, last_upd, completed_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                          (row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18]))
         conn.commit()
         conn.close()
@@ -385,8 +385,8 @@ def add_asset():
         model = request.form.get('model') 
         specs = request.form.get('specs')
         ram_slot = request.form.get('ram_slot')
-        ram_type = request.form.get('ram_type')
         ram_capacity = request.form.get('ram_capacity')
+        ram_type = request.form.get('ram_type')
         pc_name = request.form.get('pc_name')
         win_ver = request.form.get('win_ver')
         last_upd = request.form.get('last_upd')
@@ -403,9 +403,9 @@ def add_asset():
                 flash('Asset tag already exists. Please use a unique asset tag.')
                 return redirect(url_for('add_asset'))
             # Insert the data into the database
-            conn.execute('''INSERT INTO assets (site, asset_type, brand, asset_tag, serial_no, location, campaign, station_no, pur_date, si_num, model, specs, ram_slot, ram_type, ram_capacity, pc_name, win_ver, last_upd, completed_by)
+            conn.execute('''INSERT INTO assets (site, asset_type, brand, asset_tag, serial_no, location, campaign, station_no, pur_date, si_num, model, specs, ram_slot, ram_capacity, ram_type, pc_name, win_ver, last_upd, completed_by)
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
-                         (site, asset_type, brand, asset_tag, serial_no, location, campaign, station_no, pur_date, si_num, model, specs, ram_slot, ram_type, ram_capacity, pc_name, win_ver, last_upd, completed_by))
+                         (site, asset_type, brand, asset_tag, serial_no, location, campaign, station_no, pur_date, si_num, model, specs, ram_slot, ram_capacity, ram_type, pc_name, win_ver, last_upd, completed_by))
             conn.commit()
             flash('Asset added successfully!')
         except Exception as e:
@@ -460,8 +460,8 @@ def edit_asset(asset_id):
         model = request.form.get('model')
         specs = request.form.get('specs')
         ram_slot = request.form.get('ram_slot')
-        ram_type = request.form.get('ram_type')
         ram_capacity = request.form.get('ram_capacity')
+        ram_type = request.form.get('ram_type')
         pc_name = request.form.get('pc_name')
         win_ver = request.form.get('win_ver')
         last_upd = request.form.get('last_upd')
@@ -491,8 +491,8 @@ def edit_asset(asset_id):
                 flash('Asset tag already exists. Please use a unique asset tag.')
                 return redirect(url_for('edit_asset', asset_id=asset_id))
             # Update the data in the database
-            conn.execute('''UPDATE assets SET site = ?, asset_type = ?, brand = ?, asset_tag = ?, serial_no = ?, location = ?, campaign = ?, station_no = ?, pur_date = ?, si_num = ?, model = ?, specs = ?, ram_slot = ?, ram_type = ?, ram_capacity = ?, pc_name = ?, win_ver = ?, last_upd = ?, completed_by = ?, updated_at = DATETIME('now', 'localtime') WHERE id = ?''',
-                         (site, asset_type, brand, asset_tag, serial_no, location, campaign, station_no, pur_date, si_num, model, specs, ram_slot, ram_type, ram_capacity, pc_name, win_ver, last_upd, completed_by, asset_id))
+            conn.execute('''UPDATE assets SET site = ?, asset_type = ?, brand = ?, asset_tag = ?, serial_no = ?, location = ?, campaign = ?, station_no = ?, pur_date = ?, si_num = ?, model = ?, specs = ?, ram_slot = ?, ram_capacity = ?, ram_type = ?, pc_name = ?, win_ver = ?, last_upd = ?, completed_by = ?, updated_at = DATETIME('now', 'localtime') WHERE id = ?''',
+                         (site, asset_type, brand, asset_tag, serial_no, location, campaign, station_no, pur_date, si_num, model, specs, ram_slot, ram_capacity, ram_type, pc_name, win_ver, last_upd, completed_by, asset_id))
             conn.commit()
             flash('Asset updated successfully!')
         except Exception as e:
@@ -549,8 +549,8 @@ def request_edit(asset_id):
             'model': request.form.get('model'),
             'specs': request.form.get('specs'),
             'ram_slot': request.form.get('ram_slot'),
-            'ram_type': request.form.get('ram_type'),
             'ram_capacity': request.form.get('ram_capacity'),
+            'ram_type': request.form.get('ram_type'),
             'pc_name': request.form.get('pc_name'),
             'win_ver': request.form.get('win_ver'),
             'last_upd': request.form.get('last_upd'),
@@ -563,11 +563,11 @@ def request_edit(asset_id):
             conn.execute(
                 '''INSERT INTO edit_assets 
                 (id, site, asset_type, brand, asset_tag, serial_no, location, campaign, station_no, pur_date, 
-                si_num, model, specs, ram_slot, ram_type, ram_capacity, pc_name, win_ver, last_upd, completed_by) 
+                si_num, model, specs, ram_slot, ram_capacity, ram_type, pc_name, win_ver, last_upd, completed_by) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
                 (data['id'], data['site'], data['asset_type'], data['brand'], data['asset_tag'], data['serial_no'],
                  data['location'], data['campaign'], data['station_no'], data['pur_date'], data['si_num'], data['model'],
-                 data['specs'], data['ram_slot'], data['ram_type'], data['ram_capacity'], data['pc_name'], data['win_ver'],
+                 data['specs'], data['ram_slot'], data['ram_capacity'], data['ram_type'], data['pc_name'], data['win_ver'],
                  data['last_upd'], data['completed_by'])
             )
             conn.commit()
@@ -589,8 +589,8 @@ def approve_edit(id):
             flash('Edit request not found.', 'danger')
             return redirect(url_for('audit'))
         # Update the assets table with the edit request data
-        conn.execute('''UPDATE assets SET site = ?, asset_type = ?, brand = ?, asset_tag = ?, serial_no = ?, location = ?, campaign = ?, station_no = ?, pur_date = ?, si_num = ?, model = ?, specs = ?, ram_slot = ?, ram_type = ?, ram_capacity = ?, pc_name = ?, win_ver = ?, last_upd = ?, completed_by = ?, updated_at = DATETIME('now', 'localtime') WHERE id = ?''',
-                     (edit_request['site'], edit_request['asset_type'], edit_request['brand'], edit_request['asset_tag'], edit_request['serial_no'], edit_request['location'], edit_request['campaign'], edit_request['station_no'], edit_request['pur_date'], edit_request['si_num'], edit_request['model'], edit_request['specs'], edit_request['ram_slot'], edit_request['ram_type'], edit_request['ram_capacity'], edit_request['pc_name'], edit_request['win_ver'], edit_request['last_upd'], edit_request['completed_by'], edit_request['id']))
+        conn.execute('''UPDATE assets SET site = ?, asset_type = ?, brand = ?, asset_tag = ?, serial_no = ?, location = ?, campaign = ?, station_no = ?, pur_date = ?, si_num = ?, model = ?, specs = ?, ram_slot = ?, ram_capacity = ?, ram_type = ?, pc_name = ?, win_ver = ?, last_upd = ?, completed_by = ?, updated_at = DATETIME('now', 'localtime') WHERE id = ?''',
+                     (edit_request['site'], edit_request['asset_type'], edit_request['brand'], edit_request['asset_tag'], edit_request['serial_no'], edit_request['location'], edit_request['campaign'], edit_request['station_no'], edit_request['pur_date'], edit_request['si_num'], edit_request['model'], edit_request['specs'], edit_request['ram_slot'], edit_request['ram_capacity'], edit_request['ram_type'], edit_request['pc_name'], edit_request['win_ver'], edit_request['last_upd'], edit_request['completed_by'], edit_request['id']))
         # Mark the edit request as approved
         conn.execute('UPDATE edit_assets SET status = "approved" WHERE id = ?', (id,))
         conn.execute('DELETE FROM edit_assets WHERE id = ?', (id,))

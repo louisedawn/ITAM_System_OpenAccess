@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>IT Asset Management System</title>
+{% endblock %}
+{% block content %}
+<main><div class="container-fluid">
+        {% with messages = get_flashed_messages() %}{% if messages %}<ul class="alert alert-success" id="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <div class="header1 mb-4 d-flex justify-content-between align-items-center">
+            <h1 id="headerInv" class="mt-4"><i class="fas fa-dolly-flatbed"></i> Inventory</h1></div>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Inventory</li></ol>
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center"><b>Manage IT Assets</b>
+                <form action="/import-csv" method="POST" enctype="multipart/form-data" class="me-2">
+                    <input type="file" name="csv_file" required>
+                    <input type="submit" value="Import CSV File" class="btn btn-primary" aria-label="Import CSV File"></form>
+                <a href="/add-asset/" id="addAsset" value="Add New Asset" class="btn btn-primary ms-auto" aria-label="Add New Asset">Add New Asset</a></div>
+            <div class="card-body">
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center"><i class="fas fa-table mr-1"></i><b>IT Assets Table</b></div>
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="btn btn-success" aria-label="Export to Excel" id="exportButton">Export to Excel</a> <!-- Export Button --></div></div>
+                    <div class="card-body">
+                        <div class="mb-3"><label>Select Columns to Display:</label><div class="row">
+                                <div class="col-md-4"><div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="site" id="toggleSite" checked>
+                                        <label class="form-check-label" for="toggleSite">Site</label></div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="asset_type" id="toggleAssetType" checked>
+                                        <label class="form-check-label" for="toggleAssetType">Asset Type</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="brand" id="toggleBrand" checked>
+                                        <label class="form-check-label" for="toggleBrand">Brand</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="asset_tag" id="toggleAssetTag" checked>
+                                        <label class="form-check-label" for="toggleAssetTag">Asset Tag</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="serial_no" id="toggleSerialNo" checked>
+                                        <label class="form-check-label" for="toggleSerialNo">Serial Number</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="location" id="toggleLocation" checked>
+                                        <label class="form-check-label" for="toggleLocation">Location</label>
+                                    </div>
+                                </div>
+                                <!-- Second Column -->
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="campaign" id="toggleCampaign" checked>
+                                        <label class="form-check-label" for="toggleCampaign">Campaign</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="station_no" id="toggleStationNo" checked>
+                                        <label class="form-check-label" for="toggleStationNo">Station Number</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="pur_date" id="togglePurDate" checked>
+                                        <label class="form-check-label" for="togglePurDate">Purchase Date</label>
+                                    </div>
+                                
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="si_num" id="toggleSiNum" checked>
+                                        <label class="form-check-label" for="toggleSiNum">Sales Invoice Number</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="model" id="toggleModel" checked>
+                                        <label class="form-check-label" for="toggleModel">Model</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="specs" id="toggleSpecs" checked>
+                                        <label class="form-check-label" for="toggleSpecs">Specifications</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="ram_slot" id="toggleRamSlot" checked>
+                                        <label class="form-check-label" for="toggleRamSlot">RAM Slot</label>
+                                    </div>
+                                </div>
+                                <!-- Third Column -->
+                                <div class="col-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="ram_type" id="toggleRamType" checked>
+                                        <label class="form-check-label" for="toggleRamType">RAM Type</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="ram_capacity" id="toggleRamCapacity" checked>
+                                        <label class="form-check-label" for="toggleRamCapacity">RAM Capacity</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="pc_name" id="togglePcName" checked>
+                                        <label class="form-check-label" for="togglePcName">PC Name</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="win_ver" id="toggleWinVer" checked>
+                                        <label class="form-check-label" for="toggleWinVer">Windows Version</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="last_upd" id="toggleLastUpd" checked>
+                                        <label class="form-check-label" for="toggleLastUpd">Last Update/Date Installed</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input column-toggle" type="checkbox" value="completed_by" id="toggleCompletedBy" checked>
+                                        <label class="form-check-label" for="toggleCompletedBy">Completed By</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+                        <div class="table-responsive">
+                            {% if assets|length < 1 %}
+                            <h4>There are no assets, add one above</h4>
+                            {% else %}
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr><th>Actions</th><th class="site">Site</th><th class="asset_type">Asset Type</th><th class="brand">Brand</th><th class="asset_tag">Asset Tag</th><th class="serial_no">Serial Number</th><th class="location">Location</th><th class="campaign">Campaign</th><th class="station_no">Station Number</th><th class="pur_date">Purchase Date</th><th class="si_num">Sales Invoice Number</th><th class="model">Model</th><th class="specs">Specifications</th><th class="ram_slot">RAM Slot</th><th class="ram_type">RAM Type</th><th class="ram_capacity">RAM Capacity</th><th class="pc_name">PC Name</th><th class="win_ver">Windows Version</th><th class="last_upd">Last Update/Date Installed</th><th class="completed_by">Completed By</th>
+                                    </tr></thead><tbody>
+                                    {% for asset in assets %}
+                                    <tr><td><div class="d-inline-flex">
+                                                <a href="{{ url_for('edit_asset', asset_id=asset.id) }}" class="btn btn-warning">
+                                                    <i class="fas fa-edit"></i></a>
+                                                <a href="{{ url_for('delete_asset', asset_id=asset.id) }}" class="btn btn-danger" style="margin-left: 5px;">
+                                                    <i class="fas fa-trash-alt"></i></a></div></td>                                        
+                                        <td class="site">{{ asset.site }}</td><td class="asset_type">{{ asset.asset_type }}</td><td class="brand">{{ asset.brand }}</td><td class="asset_tag">{{ asset.asset_tag }}</td><td class="serial_no">{{ asset.serial_no }}</td><td class="location">{{ asset.location }}</td><td class="campaign">{{ asset.campaign }}</td><td class="station_no">{{ asset.station_no }}</td><td class="pur_date">{{ asset.pur_date }}</td><td class="si_num">{{ asset.si_num }}</td><td class="model">{{ asset.model }}</td><td class="specs">{{ asset.specs }}</td><td class="ram_slot">{{ asset.ram_slot }}</td><td class="ram_type">{{ asset.ram_type }}</td><td class="ram_capacity">{{ asset.ram_capacity }}</td><td class="pc_name">{{ asset.pc_name }}</td><td class="win_ver">{{ asset.win_ver }}</td><td class="last_upd">{{ asset.last_upd }}</td><td class="completed_by">{{ asset.completed_by }}</td></tr>
+                                    {% endfor %}</tbody></table>{% endif %}</div></div></div></div></div></div></main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set a timer to remove flash messages after 5 seconds
+        setTimeout(function() {
+            var flashMessages = document.getElementById('flash-messages');
+            if (flashMessages) {
+                flashMessages.style.display = 'none'; // Hide the flash messages
+            }
+        }, 5000); // 5000 milliseconds = 5 seconds
+
+        // Handle column visibility
+        document.querySelectorAll('.column-toggle').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var columnClass = this.value;
+                var isChecked = this.checked;
+                var cells = document.querySelectorAll('.' + columnClass);
+                
+                cells.forEach(function(cell) {
+                    cell.style.display = isChecked ? '' : 'none';});});});
+        document.querySelectorAll('.column-toggle').forEach(function(checkbox) {
+            checkbox.dispatchEvent(new Event('change'));});
+        document.getElementById('exportButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            let selectedColumns = [];
+            document.querySelectorAll('.column-toggle:checked').forEach(function(checkbox) {
+                selectedColumns.push(checkbox.value);});
+            fetch('/export-excel', {method: 'POST',headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ selectedColumns: selectedColumns })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.blob(); // Return the file as a blob
+                } else {
+                    throw new Error('Export failed.');
+                }
+            })
+            .then(blob => {
+                // Create a link to download the file
+                const url = window.URL.createObjectURL(new Blob([blob]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'ITAssetsInventory.xlsx');
+                document.body.appendChild(link);
+                link.click();
+                link.parentNode.removeChild(link);
+            })
+            .catch(error => {
+                console.error('Error exporting file:', error);
+                alert('Failed to export the file.');});});});
+</script>
+{% endblock %}

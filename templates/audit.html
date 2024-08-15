@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>IT Asset Management System</title>
+{% endblock %}
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="alert alert-success" id="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <h1 class="mt-4"><i class="fas fa-clock"></i> Audit Trail (History Log)</h1>
+        <br><ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Audit Trail</li>
+        </ol> </div>
+    <div class="container-fluid">
+        <!-- IT Consolidated Assets Section -->
+        <div class="card mb-4">
+            <div class="card-header"> 
+                <i class="fas fa-table mr-1"></i>
+                <b>Latest Approved Consolidated Assets</b></div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    {% if assets|length < 1 %}
+                    <h4>There are no assets, you may add one in the Inventory</h4>
+                    {% else %}
+                    <table class="table table-bordered" id="dashboardTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Site</th>
+                                <th>Asset Type</th>
+                                <th>Brand</th>
+                                <th>Asset Tag</th>
+                                <th>Serial Number</th>
+                                <th>Location</th>
+                                <th>Campaign</th>
+                                <th>Station Number</th>
+                                <th>Purchase Date</th>
+                                <th>Sales Invoice Number</th>
+                                <th>Model</th>
+                                <th>Specifications</th>
+                                <th>RAM Slot</th>
+                                <th>RAM Type</th>
+                                <th>RAM Capacity</th>
+                                <th>PC Name</th>
+                                <th>Windows Version</th>
+                                <th>Last Update/Date Installed</th>
+                                <th>Completed By</th>
+                                <th>Last Update At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for asset in assets %}
+                            <tr>
+                                <td>{{ asset.site }}</td>
+                                <td>{{ asset.asset_type }}</td>
+                                <td>{{ asset.brand }}</td>
+                                <td>{{ asset.asset_tag }}</td>
+                                <td>{{ asset.serial_no }}</td>
+                                <td>{{ asset.location }}</td>
+                                <td>{{ asset.campaign }}</td>
+                                <td>{{ asset.station_no }}</td>
+                                <td>{{ asset.pur_date }}</td>
+                                <td>{{ asset.si_num }}</td>
+                                <td>{{ asset.model }}</td>
+                                <td>{{ asset.specs }}</td>
+                                <td>{{ asset.ram_slot }}</td>
+                                <td>{{ asset.ram_type }}</td>
+                                <td>{{ asset.ram_capacity }}</td>
+                                <td>{{ asset.pc_name }}</td>
+                                <td>{{ asset.win_ver }}</td>
+                                <td>{{ asset.last_upd }}</td>
+                                <td>{{ asset.completed_by }}</td>
+                                <td>{{ asset.updated_at }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Pending Asset Edit Requests Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-edit mr-1"></i>
+                <b>Pending Asset Movement Requests</b>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    {% if edit_assets|length < 1 %}
+                    <h4>There are no pending asset movement or edit requests.</h4>
+                    {% else %}
+                    <table class="table table-bordered" id="editAssetsTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Actions</th>
+                                <th>ID</th>
+                                <th>Site</th>
+                                <th>Asset Type</th>
+                                <th>Brand</th>
+                                <th>Asset Tag</th>
+                                <th>Serial Number</th>
+                                <th>Location</th>
+                                <th>Campaign</th>
+                                <th>Station Number</th>
+                                <th>Purchase Date</th>
+                                <th>Sales Invoice Number</th>
+                                <th>Model</th>
+                                <th>Specifications</th>
+                                <th>RAM Slot</th>
+                                <th>RAM Type</th>
+                                <th>RAM Capacity</th>
+                                <th>PC Name</th>
+                                <th>Windows Version</th>
+                                <th>Last Update/Date Installed</th>
+                                <th>Requested By</th>
+                                <th>Requested At</th>
+                            </tr> </thead> <tbody>
+                            {% for edit_asset in edit_assets %}
+                            <tr>
+                            <td>
+                                <div class="d-flex">
+                                <form action="{{ url_for('approve_edit', id=edit_asset.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to approve this request?');">
+                                        <i class="far fa-thumbs-up"></i>
+                                    </button>
+                                </form>
+                                <form action="{{ url_for('reject_edit', id=edit_asset.id) }}" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to reject this request?');">
+                                        <i class="	far fa-times-circle"></i>
+                                    </button>
+                                </form>
+                                </div>                           
+                            </td> 
+                            <td>{{ edit_asset.id }}</td>
+                            <td>{{ edit_asset.site }}</td>
+                            <td>{{ edit_asset.asset_type }}</td>
+                            <td>{{ edit_asset.brand }}</td>
+                            <td>{{ edit_asset.asset_tag }}</td>
+                            <td>{{ edit_asset.serial_no }}</td>
+                            <td>{{ edit_asset.location }}</td>
+                            <td>{{ edit_asset.campaign }}</td>
+                            <td>{{ edit_asset.station_no }}</td>
+                            <td>{{ edit_asset.pur_date }}</td>
+                            <td>{{ edit_asset.si_num }}</td>
+                            <td>{{ edit_asset.model }}</td>
+                            <td>{{ edit_asset.specs }}</td>
+                            <td>{{ edit_asset.ram_slot }}</td>
+                            <td>{{ edit_asset.ram_type }}</td>
+                            <td>{{ edit_asset.ram_capacity }}</td>
+                            <td>{{ edit_asset.pc_name }}</td>
+                            <td>{{ edit_asset.win_ver }}</td>
+                            <td>{{ edit_asset.last_upd }}</td>
+                            <td>{{ edit_asset.requested_by }}</td>
+                            <td>{{ edit_asset.updated_at }}</td>
+                        </tr>
+                            {% endfor %} </tbody> </table>
+                    {% endif %}
+                </div> </div> </div>
+        {% if session['user_role'] in ['Super-Admin'] %}
+        <!-- Latest System Users Update Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-users"></i>
+                <b>Latest System Users Update</b>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    {% if users|length < 1 %}
+                    <h4>There are no users. Add one above</h4>
+                    {% else %}
+                    <table class="table table-bordered" id="usersTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>Password</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.password }}</td>
+                                <td>{{ user.user_role }}</td>    
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set a timer to remove flash messages after 5 seconds
+        setTimeout(function() {
+            var flashMessages = document.getElementById('flash-messages');
+            if (flashMessages) {
+                flashMessages.style.display = 'none'; // Hide the flash messages
+            } }, 5000); // 5000 milliseconds = 5 seconds 
+            }); </script>
+{% endblock %}

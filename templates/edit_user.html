@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Edit User</title>
+{% endblock %}
+{% block content %}
+<main>
+    <div class="container-fluid">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="alert alert-danger" id="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <h1 class="mt-4"><i class="fas fa-user-edit"></i> Edit User</h1>
+        <br><ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/systemusers">System Users</a></li>
+            <li class="breadcrumb-item active">Edit User</li></ol>
+        <div class="card mb-4">
+            <div class="card-header"><b>Edit User Details</b></div>
+            <div class="card-body">
+                <form action="/edit_user/{{ user.email }}" method="POST">
+                    <div class="form-group row mb-3">
+                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control form-control-sm" name="email" id="email" value="{{ user.email }}" readonly></div></div>
+                    <div class="form-group row mb-3">
+                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control form-control-sm" name="name" id="name" value="{{ user.name }}" required></div></div>
+                    <div class="form-group row mb-3">
+                        <label for="current_password" class="col-sm-2 col-form-label">Current Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control form-control-sm" name="current_password" id="current_password" required></div></div>
+                    <div class="form-group row mb-3">
+                        <label for="new_password" class="col-sm-2 col-form-label">New Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control form-control-sm" name="new_password" id="new_password"></div></div>
+                    <div class="form-group row mb-3">
+                        <label for="confirm_password" class="col-sm-2 col-form-label">Confirm New Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control form-control-sm" name="confirm_password" id="confirm_password"></div></div>
+                    <div class="form-group row mb-3">
+                        <label for="super_admin_password" class="col-sm-2 col-form-label">Enter Your Super-Admin Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control form-control-sm" name="super_admin_password" id="super_admin_password" required></div></div>
+                    <div class="form-group row mb-3">
+                        <label for="role" class="col-sm-2 col-form-label">User-Role</label>
+                        <div class="col-sm-4">
+                            <select class="form-control form-control-sm" name="role" id="role" required>
+                                <option value="" disabled selected>Select user-role</option>
+                                <option value="Super-Admin">Super-Admin</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Super-User">Super-User</option>
+                                <option value="User">User</option></select></div></div>
+                    <div class="form-group row">
+                        <div class="col-sm-4 offset-sm-2">
+                            <button type="submit" class="btn btn-primary">Update User</button>
+                            <a href="{{ url_for('system_users') }}" class="btn btn-secondary">Cancel</a></div></div></form></div></div></div>
+                    </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var flashMessages = document.getElementById('flash-messages');
+            if (flashMessages) { flashMessages.style.display = 'none'; }}, 5000); });
+</script>
+{% endblock %}

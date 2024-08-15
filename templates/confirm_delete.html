@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Confirm Delete User</title>
+{% endblock %}
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="alert alert-danger" id="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <h1 class="mt-4"><i class="fas fa-user-times"></i> Confirm Delete User</h1>
+        <br><ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/systemusers">System Users</a></li>
+            <li class="breadcrumb-item active">Confirm Delete User</li>
+        </ol>
+        <p><b>Are you sure you want to delete the user with email: {{ email }}?</b></p>
+        <form action="{{ url_for('confirm_delete', email=email) }}" method="POST">
+            <div class="form-group">
+                <label for="password">Enter your password to confirm:</label>
+                <input type="password" class="form-control" name="password" id="password" required> </div>
+            <button type="submit" class="btn btn-danger">Delete User</button>
+            <a href="{{ url_for('system_users') }}" class="btn btn-secondary">Cancel</a>
+        </form> </div> </main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set a timer to remove flash messages after 5 seconds
+        setTimeout(function() {
+            var flashMessages = document.getElementById('flash-messages');
+            if (flashMessages) {
+                flashMessages.style.display = 'none'; // Hide the flash messages
+            }
+        }, 5000); // 5000 milliseconds = 5 seconds
+    }); </script>
+{% endblock %}

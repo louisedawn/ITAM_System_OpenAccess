@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Delete Asset</title>
+{% endblock %}
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="alert alert-danger" id="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <h1 class="mt-4"><i class="fas fa-user-times"></i> Confirm IT Asset Deletion</h1>
+        <br>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="/inventory">Inventory</a></li>
+            <li class="breadcrumb-item active">Delete Asset</li>
+        </ol> <p><b>Are you sure you want to delete this IT Asset?</b></p>
+        <!-- Display the selected asset details -->
+        <div class="asset-details">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Site</th>
+                        <th>Asset Type</th>
+                        <th>Brand</th>
+                        <th>Asset Tag</th>
+                        <th>Serial Number</th>
+                        <th>Location</th>
+                        <th>Campaign</th>
+                        <th>Station Number</th>
+                        <th>Purchase Date</th>
+                        <th>Sales Invoice Number</th>
+                        <th>Model</th>
+                        <th>Specifications</th>
+                        <th>RAM Slot</th>
+                        <th>RAM Type</th>
+                        <th>RAM Capacity</th>
+                        <th>PC Name</th>
+                        <th>Windows Version</th>
+                        <th>Last Update/Date Installed</th>
+                        <th>Completed By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ asset.id }}</td>
+                        <td>{{ asset.site }}</td>
+                        <td>{{ asset.asset_type }}</td>
+                        <td>{{ asset.brand }}</td>
+                        <td>{{ asset.asset_tag }}</td>
+                        <td>{{ asset.serial_no }}</td>
+                        <td>{{ asset.location }}</td>
+                        <td>{{ asset.campaign }}</td>
+                        <td>{{ asset.station_no }}</td>
+                        <td>{{ asset.pur_date }}</td>
+                        <td>{{ asset.si_num }}</td>
+                        <td>{{ asset.model }}</td>
+                        <td>{{ asset.specs }}</td>
+                        <td>{{ asset.ram_slot }}</td>
+                        <td>{{ asset.ram_type }}</td>
+                        <td>{{ asset.ram_capacity }}</td>
+                        <td>{{ asset.pc_name }}</td>
+                        <td>{{ asset.win_ver }}</td>
+                        <td>{{ asset.last_upd }}</td>
+                        <td>{{ asset.completed_by }}</td>
+                    </tr> </tbody> </table> </div>
+        <form action="{{ url_for('delete_asset', asset_id=asset.id) }}" method="POST">
+            <div class="form-group">
+                <label for="password">Enter your password to confirm:</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-danger">Delete IT Asset</button>
+            <a href="{{ url_for('inventory') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+        <br>
+    </div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set a timer to remove flash messages after 5 seconds
+        setTimeout(function() {
+            var flashMessages = document.getElementById('flash-messages');
+            if (flashMessages) {
+                flashMessages.style.display = 'none'; // Hide the flash messages
+            }
+        }, 5000); // 5000 milliseconds = 5 seconds
+    });
+</script>
+{% endblock %}

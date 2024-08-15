@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>IT Asset Management System</title>
+{% endblock %}
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4"><i class="fas fa-info-circle"></i> Asset Care/Frequently Asked Questions</h1>
+        <div class="header1 mb-4 d-flex justify-content-between align-items-center">
+        </div>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/index">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Asset Care/FAQs</li>
+        </ol>
+        </b><p>Asset Care at Open Access BPO refers to our comprehensive approach to managing and maintaining the physical and digital assets essential for our operations. This includes equipment, software, and infrastructure that support our services.</p> <br> 
+        <h4 style="text-align: center; color: #6172B0;">
+            <b> General Questions</b>
+
+            <style>
+                .dropdown {
+                    display: none;
+                }
+                .faq-question {
+                    color: #6172B0;
+                }
+                .dropdown-content {
+                    color: rgb(32, 30, 30);
+                }
+            </style>
+            <title>Asset Care FAQs</title>
+        </head>
+        <body>
+            <h6> 
+            <!-- 1st Q -->
+            <div>
+                <p class="faq-question">
+                    <br><b>How do I report a problem with an asset?</b>
+                    <i class="fa fa-caret-down" onclick="toggleDropdown('dropdownContent1')" style="cursor: pointer;"></i>
+                </p>
+                <div class="dropdown" id="dropdownContent1">
+                    <p class="dropdown-content">
+                        You can report a problem with an asset by contacting the support team via email at itsupport@openaccessbpo.com
+                    </p>
+                </div>
+            </div>
+            <!-- 2nd Q -->
+            <div>
+                <p class="faq-question">
+                    <br><b>Why is Asset Care important?</b>
+                    <i class="fa fa-caret-down" onclick="toggleDropdown('dropdownContent2')" style="cursor: pointer;"></i>
+                </p>
+                <div class="dropdown" id="dropdownContent2">
+                    <p class="dropdown-content">
+                        Proper asset care helps prolong the lifespan of company equipment, ensures operational efficiency, and helps maintain compliance with company policies and legal regulations.</p>
+                </div></div>
+            <!-- 3rd Q -->
+            <div>
+                <p class="faq-question">
+                    <br><b>How are assets allocated to employees?</b>
+                    <i class="fa fa-caret-down" onclick="toggleDropdown('dropdownContent3')" style="cursor: pointer;"></i>
+                </p>
+                <div class="dropdown" id="dropdownContent3">
+                    <p class="dropdown-content">
+                        Assets are allocated based on job roles and departmental needs. Employees will receive the necessary equipment and tools required to perform their duties effectively.
+                    </p>
+                </div>
+            </div>
+            <!-- 4th Q -->
+            <div>
+                <p class="faq-question">
+                    <br><b>Can I request additional or upgraded equipment?</b>
+                    <i class="fa fa-caret-down" onclick="toggleDropdown('dropdownContent4')" style="cursor: pointer;"></i>
+                </p>
+                <div class="dropdown" id="dropdownContent4">
+                    <p class="dropdown-content">
+                        Yes, you can request additional or upgraded equipment through the Asset Management System. All requests are subject to approval based on necessity and budget considerations.</p>
+                </div> </div>
+            <!-- 5th Q -->
+            <div>
+                <p class="faq-question">
+                    <br><b>What measures are in place to ensure asset security?</b>
+                    <i class="fa fa-caret-down" onclick="toggleDropdown('dropdownContent5')" style="cursor: pointer;"></i>
+                </p>
+                <div class="dropdown" id="dropdownContent5">
+                    <p class="dropdown-content">
+                        Open Access BPO employs several security measures, including asset tagging, regular audits, and restricted access areas. Employees are also trained on proper asset care and security protocols.</p>
+                </div> </div>
+            <!-- 6th Q -->
+            <div>
+                <p class="faq-question">
+                    <br><b>Who do I contact for more information about asset care?</b>
+                    <i class="fa fa-caret-down" onclick="toggleDropdown('dropdownContent6')" style="cursor: pointer;"></i></p>
+                <div class="dropdown" id="dropdownContent6">
+                    <p class="dropdown-content">
+                        For more information, contact the Asset Management Team via email at assetcare@openaccessbpo.com or call the IT Helpdesk at (123) 456-7890.</p></div></div>
+            <script>
+                    function toggleDropdown(id) {
+                    var dropdown = document.getElementById(id);
+                    dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+                }  </script> </h6> </div> </main>
+{% endblock %}

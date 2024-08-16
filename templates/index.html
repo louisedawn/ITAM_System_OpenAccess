@@ -27,37 +27,62 @@
                                         <td id="storageRoomCount" class="font-weight-normal text-dark">{{ storage_room_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>7th Floor</td>
-                                        <td id="seventhFloorCount" class="font-weight-normal text-dark">{{ seventh_floor_count }}</td>
+                                        <td>Monitor</td>
+                                        <td id="monitorCount" class="font-weight-normal text-dark">{{ monitor_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>19th Floor</td>
-                                        <td id="nineteenthFloorCount" class="font-weight-normal text-dark">{{ nineteenth_floor_count }}</td>
+                                        <td>Desktop</td>
+                                        <td id="desktopCount" class="font-weight-normal text-dark">{{ desktop_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>21st Floor</td>
-                                        <td id="twentyFirstFloorCount" class="font-weight-normal text-dark">{{ twenty_first_floor_count }}</td>
+                                        <td>Laptop</td>
+                                        <td id="laptopCount" class="font-weight-normal text-dark">{{ laptop_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>32nd Floor</td>
-                                        <td id="thirtySecondFloorCount" class="font-weight-normal text-dark">{{ thirty_second_floor_count }}</td>
+                                        <td>Headset</td>
+                                        <td id="headsetCount" class="font-weight-normal text-dark">{{ headset_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>WFH</td>
-                                        <td id="wfhCount" class="font-weight-normal text-dark">{{ wfh_count }}</td>
+                                        <td>Dongle</td>
+                                        <td id="dongleCount" class="font-weight-normal text-dark">{{ dongle_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Wise Production Area</td>
-                                        <td id="wiseProductionAreaCount" class="font-weight-normal text-dark">{{ wise_production_area_count }}</td>
+                                        <td>IPPhone</td>
+                                        <td id="IPPhoneCount" class="font-weight-normal text-dark">{{ IPPhone_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Vendor</td>
-                                        <td id="vendorCount" class="font-weight-normal text-dark">{{ vendor_count }}</td>
+                                        <td>CCTV</td>
+                                        <td id="cctvCount" class="font-weight-normal text-dark">{{ cctv_count }}</td>
                                     </tr>
                                     <tr>
-                                        <td>JAKA - 5th Floor</td>
-                                        <td id="jakaFifthFloorCount" class="font-weight-normal text-dark">{{ jaka_fifth_floor_count }}</td>
+                                        <td>Switch</td>
+                                        <td id="switchCount" class="font-weight-normal text-dark">{{ switch_count }}</td>
                                     </tr>
+                                    <tr>
+                                        <td>Access Point</td>
+                                        <td id="accessCount" class="font-weight-normal text-dark">{{ access_count }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Router</td>
+                                        <td id="routerCount" class="font-weight-normal text-dark">{{ router_count }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cell Phone</td>
+                                        <td id="CPCount" class="font-weight-normal text-dark">{{ cp_count }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Door Access</td>
+                                        <td id="doorCount" class="font-weight-normal text-dark">{{ door_count }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Server</td>
+                                        <td id="serverCount" class="font-weight-normal text-dark">{{ server_count }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>UPS</td>
+                                        <td id="upsCount" class="font-weight-normal text-dark">{{ ups_count }}</td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -145,26 +170,38 @@
         const ctx = document.getElementById('assetsPieChart').getContext('2d');
         const assetCounts = [
             {{ storage_room_count }},
-            {{ seventh_floor_count }},
-            {{ nineteenth_floor_count }},
-            {{ twenty_first_floor_count }},
-            {{ thirty_second_floor_count }},
-            {{ wfh_count }},
-            {{ wise_production_area_count }},
-            {{ vendor_count }},
-            {{ jaka_fifth_floor_count }}
+            {{ monitor_count }},
+            {{ desktop_count }},
+            {{ laptop_count }},
+            {{ headset_count }},
+            {{ dongle_count }},
+            {{ IPPhone_count }},
+            {{ cctv_count }},
+            {{ switch_count }},
+            {{ access_count }},
+            {{ router_count }},
+            {{ cp_count }},
+            {{ door_count }},
+            {{ server_count }},
+            {{ ups_count }}
         ];
 
         const locations = [
             'Storage Room', 
-            '7th Floor', 
-            '19th Floor', 
-            '21st Floor', 
-            '32nd Floor', 
-            'WFH', 
-            'Wise Production Area', 
-            'Vendor', 
-            'JAKA - 5th Floor'
+            'Monitor', 
+            'Desktop', 
+            'Laptop', 
+            'Headset', 
+            'Dongle', 
+            'IPPhone', 
+            'CCTV', 
+            'Switch',
+            'Access Point',
+            'Router',
+            'Cell Phone',
+            'Door Access',
+            'Server',
+            'UPS'
         ];
 
         const assetsPieChart = new Chart(ctx, {
@@ -176,14 +213,20 @@
                     data: assetCounts,
                     backgroundColor: [
                         '#FF6384',  // Storage Room
-                        '#36A2EB',  // 7th Floor
-                        '#FFCE56',  // 19th Floor
-                        '#4BC0C0',  // 21st Floor
-                        '#9966FF',  // 32nd Floor
-                        '#F0EAAC',  // WFH
-                        '#800000',  // Wise Production Area
-                        '#674188',  // Vendor
-                        '#BEDC74'   // JAKA - 5th Floor
+                        '#36A2EB',  // Monitor
+                        '#FFCE56',  // Desktop
+                        '#4BC0C0',  // Laptop
+                        '#9966FF',  // Headset
+                        '#F0EAAC',  // Dongle
+                        '#800000',  // IPPhone
+                        '#674188',  // CCTV
+                        '#BEDC74',  // Switch
+                        '#FF9999',  // Access Point
+                        '#CCCCFF',  // Router
+                        '#FFFF99',  // Cell Phone
+                        '#99FF99',  // Door Access
+                        '#FFCC99',  // Server
+                        '#66CCCC'   // UPS
                     ],
                     hoverOffset: 4
                 }]
